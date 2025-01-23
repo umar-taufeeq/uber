@@ -88,3 +88,68 @@ Requestcurl -X POST http://localhost:4000/users/login \
   "email": "john.doe@example.com",
   "password": "password123"
 }'
+# User Profile Endpoint
+## GET /users/profile
+This endpoint is used to get the profile of the authenticated user.
+
+# Request
+URL: /users/profile
+Method: GET
+## Headers: Authorization: Bearer <token>
+Response
+## Success Response:
+
+Code: 200 OK
+Content:
+{
+  "_id": "user_id_here",
+  "fullname": {
+    "firstname": "John",
+    "lastname": "Doe"
+  },
+  "email": "john.doe@example.com",
+  "socketId": null
+}
+## Error Response:
+
+# Code: 401 Unauthorized
+Content:
+{
+  "message": "Unauthorized"
+}
+
+## user Logout Endpoint
+# GET /users/logout
+This endpoint is used to log out the authenticated user.
+blacklist the token provided in cookie or header
+
+# Request
+URL: /users/logout
+Method: GET
+Headers: Authorization: Bearer <token>
+Response
+# Success Response:
+
+# Code: 200 OK
+Content:
+{
+  "message": "User logged out successfully"
+}
+## Error Response:
+
+Code: 401 Unauthorized
+# Content:
+{
+  "message": "Unauthorized"
+}
+
+example
+## Request
+url -X GET http://localhost:4000/users/logout \
+-H "Authorization: Bearer <token>"
+## Response:
+{
+  "message": "User logged out successfully"
+}
+## Authentication
+Require a valid jwt token i the authiorization header or cookies

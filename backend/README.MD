@@ -153,3 +153,66 @@ url -X GET http://localhost:4000/users/logout \
 }
 ## Authentication
 Require a valid jwt token i the authiorization header or cookies
+
+# Captain Registration Endpoint
+
+## POST /captains/register
+
+This endpoint is used to register a new captain.
+
+### Request
+
+- **URL**: `/captains/register`
+- **Method**: `POST`
+- **Headers**: `Content-Type: application/json`
+ ## Validation
+email: Must be a valid email address.
+fullname.firstname: Must be at least 3 characters long.
+password: Must be at least 6 characters long.
+vechile.color: Must be at least 3 characters long.
+vechile.plate: Must be at least 3 characters long.
+vechile.capacity: Must be at least 1.
+vechile.vechileType: Must be one of car, motorcycle, auto.
+# Example
+  ## Request
+curl -X POST http://localhost:4000/captains/register \
+-H "Content-Type: application/json" \
+-d '{
+  "fullname": {
+    "firstname": "John",
+    "lastname": "Doe"
+  },
+  "email": "john.doe@example.com",
+  "password": "password123",
+  "vechile": {
+    "color": "Red",
+    "plate": "ABC123",
+    "capacity": 4,
+    "vechileType": "car"
+  }
+}'
+ ## Response
+{
+  "token": "jwt_token_here",
+  "captain": {
+    "_id": "captain_id_here",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john.doe@example.com",
+    "password": "hashed_password_here",
+    "socketId": null,
+    "status": "inactive",
+    "vechile": {
+      "color": "Red",
+      "plate": "ABC123",
+      "capacity": 4,
+      "vechileType": "car"
+    },
+    "location": {
+      "lat": null,
+      "lng": null
+    }
+  }
+}

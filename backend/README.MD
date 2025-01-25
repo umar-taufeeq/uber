@@ -216,7 +216,7 @@ curl -X POST http://localhost:4000/captains/register \
     }
   }
 }
-Captain Login Endpoint
+# Captain Login Endpoint
 POST /captains/login
 This endpoint is used to log in an existing captain.
 
@@ -262,7 +262,7 @@ Content:
 email: Must be a valid email address.
 password: Must be at least 6 characters long.
 
-## Captain Profile Endpoint
+# Captain Profile Endpoint
 GET /captains/profile
 This endpoint is used to get the profile of the authenticated captain.
 
@@ -295,7 +295,7 @@ Code: 200 OK
     "lng": null
   }
 }
-## Captain Logout Endpoint
+# Captain Logout Endpoint
 GET /captains/logout
 This endpoint is used to log out the authenticated captain.
 

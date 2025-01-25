@@ -216,3 +216,97 @@ curl -X POST http://localhost:4000/captains/register \
     }
   }
 }
+Captain Login Endpoint
+POST /captains/login
+This endpoint is used to log in an existing captain.
+
+## Request
+URL: /captains/login
+Method: POST
+Headers: Content-Type: application/json
+Body:
+{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}
+## response
+Success Response:
+
+Code: 200 OK
+Content:
+{
+  "token": "jwt_token_here",
+  "captain": {
+    "_id": "captain_id_here",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john.doe@example.com",
+    "password": "hashed_password_here",
+    "socketId": null,
+    "status": "inactive",
+    "vechile": {
+      "color": "Red",
+      "plate": "ABC123",
+      "capacity": 4,
+      "vechileType": "car"
+    },
+    "location": {
+      "lat": null,
+      "lng": null
+    }
+  }
+}
+## validation
+email: Must be a valid email address.
+password: Must be at least 6 characters long.
+
+## Captain Profile Endpoint
+GET /captains/profile
+This endpoint is used to get the profile of the authenticated captain.
+
+Request
+URL: /captains/profile
+Method: GET
+Headers: Authorization: Bearer <token>
+Response
+Success Response:
+
+Code: 200 OK
+## Content
+{
+  "_id": "captain_id_here",
+  "fullname": {
+    "firstname": "John",
+    "lastname": "Doe"
+  },
+  "email": "john.doe@example.com",
+  "socketId": null,
+  "status": "inactive",
+  "vechile": {
+    "color": "Red",
+    "plate": "ABC123",
+    "capacity": 4,
+    "vechileType": "car"
+  },
+  "location": {
+    "lat": null,
+    "lng": null
+  }
+}
+## Captain Logout Endpoint
+GET /captains/logout
+This endpoint is used to log out the authenticated captain.
+
+## Request
+URL: /captains/logout
+Method: GET
+Headers: Authorization: Bearer <token>
+Response
+Success Response:
+
+Code: 200 OK
+Content:{
+  "message": "Captain logged out successfully"
+}

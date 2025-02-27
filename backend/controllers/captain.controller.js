@@ -9,7 +9,7 @@ module.exports.registerCaptain = async (req, res,next) => {
     if(!errors.isEmpty()){
         return res.status(400).json({errors: errors.array()});
     }   
-    const {fullname,email,password,vechile} = req.body;
+    const {fullname,email,password,vehicle} = req.body;
     const isCaptainAlreadyExist = await CaptainModel.findOne({email});
     if(isCaptainAlreadyExist){
         return res.status(400).json({message:'Captain already exist'});
@@ -22,10 +22,10 @@ module.exports.registerCaptain = async (req, res,next) => {
         lastname:fullname.lastname,
         email,
         password:hashedPassword,
-        color:vechile.color,
-        plate:vechile.plate,
-        capacity:vechile.capacity,
-        vechileType:vechile.vechileType
+        color:vehicle.color,
+        plate:vehicle.plate,
+        capacity:vehicle.capacity,
+        vehicleType:vehicle.vehicleType
     });
     const token = captain.generateAuthToken();
 

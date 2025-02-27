@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, {useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CaptainDataContext } from '../context/CaptainContext'
 import { useNavigate } from 'react-router-dom'
@@ -31,11 +31,11 @@ const CaptainSignup = () => {
       },
       email: email,
       password: password,
-      vechile:{
+      vehicle:{
         color: vehicleColor , 
         plate: vehiclePlate, 
         capacity: vehicleCapacity, 
-        vechileType: vehicleType 
+        vehicleType: vehicleType 
       }
     }
  
@@ -162,7 +162,7 @@ const CaptainSignup = () => {
                 <option value="" disabled>Select Vehicle Type</option>
                 <option value="car">Car</option>
                 <option value="auto">Auto</option>
-                <option value="moto">Moto</option>
+                <option value="motorcycle">motorcycle</option>
               </select>
             </div>
 

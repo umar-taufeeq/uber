@@ -26,11 +26,13 @@ const CaptainProtectedWrappper = ({
             }
         }).then(response => {
             if (response.status === 200) {
+                // console.log("Captain data: ", response.data.captain);  // Check the structure here
+                // setCaptain(response.data.captain)
                 setCaptain(response.data.captain)
                 setIsLoading(false)
             }
         })
-            .catch(err => {
+            .catch((err) => {
 
                 localStorage.removeItem('token')
                 navigate('/captain-login')

@@ -26,7 +26,7 @@ async function getFare(pickup, destination) {
     const perMinuteRate = {
         auto: 2,
         car: 3,
-        moto: 1.5
+        moto: 1.2
     };
 
 

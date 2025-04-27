@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import axios from "axios";
@@ -8,6 +8,14 @@ import VechilePanel from "../components/VechilePanel";
 import ConfirmedRide from "../components/ConfirmedRide";
 import LookingForDriver from "../components/LookingForDriver";
 import WaitingForDriver from "../components/WaitingForDriver";
+
+import { SocketContext } from '../context/SocketContext';
+import { useContext } from 'react';
+import { UserDataContext } from '../context/UserContext';
+import { useNavigate } from "react-router-dom";
+
+
+
 
 const Home = () => {
   const [pickup, setPickup] = useState("");
@@ -28,8 +36,30 @@ const Home = () => {
   const [activeField, setActiveField] = useState(null);
   const [fare, setFare] = useState({});
   const [ vehicleType, setVehicleType ] = useState(null)
-    const [ ride, setRide ] = useState(null)
+  const [ ride, setRide ] = useState(null)
+  
+  const navigate = useNavigate();
 
+
+  const { socket } = useContext(SocketContext)
+  const { user } = useContext(UserDataContext)
+
+  useEffect(() => {
+      socket.emit("join", { userType: "user", userId: user._id })
+  }, [ user ])
+
+
+  socket.on('ride-confirmed', ride => {
+     setVechileFound(false)
+    setWaitingForDriver(true)
+     setRide(ride)
+})
+
+socket.on('ride-started', ride => {
+  console.log("ride")
+  setWaitingForDriver(false)
+  navigate('/riding',{ state: { ride } }) // navigate to the riding page
+})
 
 
   const handlePickupChange = async (e) => {
@@ -315,7 +345,11 @@ console.log(response.data);
         ref={waitingForDriverRef}
         className="fixed w-full  z-10 bottom-0  p-3 py-6 pt-12 px-3 bg-white"
       >
-        <WaitingForDriver waitingForDriver={waitingForDriver} />
+        <WaitingForDriver
+        ride={ride}
+        setWaitingForDriver={setWaitingForDriver}
+        setVechileFound={setVechileFound}
+        waitingForDriver={waitingForDriver} />
       </div>
     </div>
   );

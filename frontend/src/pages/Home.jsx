@@ -13,6 +13,7 @@ import { SocketContext } from '../context/SocketContext';
 import { useContext } from 'react';
 import { UserDataContext } from '../context/UserContext';
 import { useNavigate } from "react-router-dom";
+import LiveTracking from "../components/LiveTracking";
 
 
 
@@ -233,11 +234,12 @@ console.log(response.data);
       />
       <div className="h-screen w-screen">
         {/* img for temp use */}
-        <img
+        {/* <img
           className="h-full w-full object-cover"
           src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif"
           alt=""
-        />
+        /> */}
+        <LiveTracking/>
       </div>
       <div className=" flex flex-col justify-end h-screen absolute top-0 w-full ">
         <div className="bg-white p-6 h-[30%] relative">
